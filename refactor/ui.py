@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import instaloader
+import controller
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -58,14 +58,11 @@ class Ui_Dialog(object):
         self.setMainFunctionality.addItem("")
         self.setMainFunctionality.addItem("")
 
-        a = InstagramApplication(self.accountsForm,self.passwordForm,self.usernameForm,self.setFollowingFollowers,self.progressBar,self.textEdit)
+        instagram_app = controller.InstagramApplication(self.accountsForm, self.passwordForm, self.usernameForm, self.setFollowingFollowers, self.progressBar, self.textEdit)
 
-        self.startAnalysisButton.clicked.connect(a.download)
-        self.startAnalysisButton.clicked.connect(a.app)
-        self.resetButton.clicked.connect(a.clear_forms)
-
-
-
+        self.startAnalysisButton.clicked.connect(lambda: instagram_app.download())
+        self.startAnalysisButton.clicked.connect(lambda: instagram_app.app())
+        self.resetButton.clicked.connect(lambda: instagram_app.clear_forms())
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
